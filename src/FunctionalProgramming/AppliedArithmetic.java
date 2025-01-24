@@ -1,9 +1,11 @@
 package FunctionalProgramming;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class AppliedArithmetic {
     public static void main(String[] args) {
@@ -13,32 +15,21 @@ public class AppliedArithmetic {
                         .split("\\s+"))
                 .map(Integer::parseInt)
                 .toList();
-        Function<Integer, Integer> funcAdd = number -> number++;
+        Function<Integer, Integer> funcAdd = number -> number + 1;
         Function<Integer, Integer> funcMultiply = number -> number * 2;
-        Function<Integer, Integer> funcSubtract= number -> number--;
+        Function<Integer, Integer> funcSubtract= number -> number-1;
         String command = scanner.nextLine();
         while (!command.equals("end")){
-            switch (command){
-                case "add":
+            switch (command) {
+                case "add" -> numbers = numbers.stream().map(funcAdd).collect(Collectors.toList());
+                case "multiply" -> numbers = numbers.stream().map(funcMultiply).toList();
+                case "subtract" -> numbers = numbers.stream().map(funcSubtract).toList();
+                case "print" -> {
                     for (Integer number : numbers) {
-                        funcAdd.apply(number);
-                    }
-                    break;
-                case "multiply":
-                    for (Integer number : numbers) {
-                        funcMultiply.apply(number);
-                    }
-                    break;
-                case "subtract":
-                    for (Integer number : numbers) {
-                        funcSubtract.apply(number);
-                    }
-                    break;
-            }
-            command = scanner.nextLine();
-        }
-        for (Integer number : numbers) {
-            System.out.print(number + " ");
+                        System.out.print(number + " ");
+                    }System.out.println();
+                }
+            }command = scanner.nextLine();
         }
     }
 }
