@@ -1,4 +1,4 @@
-package Book;
+package IteratorsAndCompartors.exercise.Book;
 
 import java.util.Comparator;
 
